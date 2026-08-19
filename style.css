@@ -1,0 +1,387 @@
+/* Zywo — javne pravne stranice.
+ *
+ * Boje i tipografija prate `src/theme/tokens.ts` i `src/theme/typography.ts`.
+ * Kad se tema u aplikaciji promeni, promeni se i ovde — stranica koja izgleda
+ * kao tuđa aplikacija je gora nego neuređena stranica.
+ *
+ * Ista logika kao u aplikaciji na dva mesta: naslov ima fasetirani rub od
+ * gustih slojeva senke (bočna strana slova, ne senka iza njega), a pergament
+ * kartica ima tvrdu senku bez blura („izrezbaren" izgled).
+ */
+
+:root {
+  /* Brend — crimson rampa iz tokens.ts, izvan `flame` rampe namerno. */
+  --crimson:       #DC143C;
+  --crimson-deep:  #A50E2C;
+  --crimson-ink:   #6B0A1D;
+  --gold:          #FFD65C;
+
+  /* Pergament i drvo — nosivi materijal celog UI-ja. */
+  --parchment:     #FFF9EA;
+  --parchment-alt: #FDEFCF;
+  --parchment-hi:  #FFFDF6;
+  --wood:          #B8763A;
+  --wood-dark:     #6E4020;
+
+  /* Mastilo. Toplo braon, nikad crna — crna na pergamentu izgleda kao
+     greška u štampi, a ne kao deo ilustracije. */
+  --ink:           #3B2410;
+  --ink-soft:      #5B3E22;
+
+  --sky-top:       #8FD8F2;
+  --sky-bottom:    #CDEEFF;
+  --grass:         #7BC950;
+  --grass-dark:    #4E9E2E;
+  --grass-edge:    #3E8524;
+
+  /* Futura je geometrijski grotesk — isti rečnik oblika kao low-poly art. */
+  --logo-font: 'Futura', 'Century Gothic', 'Trebuchet MS', 'Avenir Next', sans-serif;
+  --body-font: 'Avenir Next', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0 20px;
+  font-family: var(--body-font);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: linear-gradient(
+    180deg,
+    var(--sky-top) 0%,
+    var(--sky-bottom) 340px,
+    var(--sky-bottom) 100%
+  );
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ── Zaglavlje ───────────────────────────────────────────────────────── */
+
+header {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 0 40px;
+  text-align: center;
+}
+
+.brand {
+  margin: 0;
+  font-family: var(--logo-font);
+  font-size: 58px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  color: var(--crimson);
+  /* Gusti mali pomaci daju punu bočnu stranu slova; jedan veliki pomak dao bi
+     samo senku iza njega. Bez blura — zamućenje bi ovo pretvorilo u glow. */
+  text-shadow:
+    0 1px 0 var(--crimson-deep),
+    0 2px 0 var(--crimson-deep),
+    0 3px 0 var(--crimson-deep),
+    0 4px 0 var(--crimson-ink),
+    0 5px 0 var(--crimson-ink),
+    0 8px 14px rgba(107, 10, 29, 0.3);
+}
+
+/* Fasete sa strane naziva — pandan zarotiranim kvadratima u aplikaciji. */
+.brand::before,
+.brand::after {
+  content: '◆';
+  margin: 0 18px;
+  font-size: 18px;
+  vertical-align: middle;
+  color: var(--gold);
+  text-shadow: 0 2px 0 var(--crimson-ink);
+}
+
+header h1 {
+  margin: 22px 0 6px;
+  font-family: var(--logo-font);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+
+.meta {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+/* ── Pergament kartica ───────────────────────────────────────────────── */
+
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 44px 46px 52px;
+  background: var(--parchment);
+  border: 4px solid var(--wood);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 0 var(--wood-dark),
+    0 14px 28px rgba(59, 36, 16, 0.22);
+}
+
+main > p:first-of-type {
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+h2 {
+  margin: 46px 0 14px;
+  padding-bottom: 10px;
+  font-family: var(--logo-font);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--crimson-deep);
+  border-bottom: 3px solid var(--parchment-alt);
+}
+
+h3 {
+  margin: 30px 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+h3 .meta {
+  font-weight: 400;
+}
+
+p {
+  margin: 0 0 15px;
+}
+
+ul {
+  margin: 0 0 18px;
+  padding-left: 22px;
+}
+
+li {
+  margin-bottom: 9px;
+}
+
+li::marker {
+  color: var(--crimson);
+}
+
+strong {
+  color: var(--ink);
+}
+
+a {
+  color: var(--crimson-deep);
+  text-decoration-color: rgba(220, 20, 60, 0.4);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--crimson);
+}
+
+/* ── Istaknuti blok ──────────────────────────────────────────────────── */
+
+.callout {
+  margin: 26px 0;
+  padding: 22px 26px;
+  background: var(--parchment-hi);
+  border: 3px solid var(--gold);
+  border-left: 9px solid var(--crimson);
+  border-radius: 16px;
+  box-shadow: 0 4px 0 rgba(185, 118, 58, 0.35);
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Tabele ──────────────────────────────────────────────────────────── */
+
+table {
+  width: 100%;
+  margin: 18px 0 24px;
+  border-collapse: collapse;
+  font-size: 15.5px;
+  background: var(--parchment-hi);
+  border: 3px solid var(--wood);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th {
+  padding: 12px 15px;
+  text-align: left;
+  font-family: var(--logo-font);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--parchment-hi);
+  background: var(--crimson-deep);
+}
+
+td {
+  padding: 12px 15px;
+  vertical-align: top;
+  border-top: 2px solid var(--parchment-alt);
+}
+
+tbody tr:nth-child(even) td {
+  background: rgba(253, 239, 207, 0.5);
+}
+
+/* ── Livada sa stvorenjima ───────────────────────────────────────────── */
+
+.meadow {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 46px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 22px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.meadow img {
+  width: 108px;
+  height: auto;
+  filter: drop-shadow(0 7px 5px rgba(59, 36, 16, 0.28));
+}
+
+/* Blago različita visina i nagib — red identično poravnatih likova izgleda
+   kao katalog, a ne kao scena. */
+.meadow img:nth-child(odd) {
+  transform: translateY(6px) rotate(-3deg);
+}
+
+.meadow img:nth-child(even) {
+  transform: translateY(-4px) rotate(3deg);
+}
+
+.ground {
+  height: 92px;
+  margin-top: -14px;
+  background: linear-gradient(180deg, var(--grass) 0%, var(--grass-dark) 100%);
+  border-top: 5px solid var(--grass-edge);
+}
+
+/* ── Podnožje ────────────────────────────────────────────────────────── */
+
+footer {
+  padding: 26px 20px 34px;
+  text-align: center;
+  font-size: 15px;
+  background: var(--grass-dark);
+}
+
+footer a {
+  margin: 0 14px;
+  color: var(--parchment-hi);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(255, 253, 246, 0.45);
+}
+
+footer a:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* Livada i podnožje idu od ivice do ivice; telo zadržava gutter. */
+.meadow,
+.ground,
+footer {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+/* ── Telefon ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 700px) {
+  body {
+    font-size: 16px;
+    padding: 0 14px;
+  }
+  header {
+    padding: 38px 0 28px;
+  }
+  .brand {
+    font-size: 40px;
+    letter-spacing: 3px;
+  }
+  .brand::before,
+  .brand::after {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  header h1 {
+    font-size: 24px;
+  }
+  main {
+    padding: 28px 22px 34px;
+    border-radius: 18px;
+  }
+  h2 {
+    margin-top: 34px;
+    font-size: 20px;
+  }
+  table {
+    font-size: 14px;
+  }
+  th,
+  td {
+    padding: 10px 11px;
+  }
+  .meadow {
+    gap: 8px;
+  }
+  .meadow img {
+    width: 66px;
+  }
+  .ground {
+    height: 60px;
+  }
+  .meadow,
+  .ground,
+  footer {
+    margin-left: -14px;
+    margin-right: -14px;
+  }
+}
+
+/* Tri lika je dovoljno na uskom ekranu — pet se stisnu u kašu. */
+@media (max-width: 460px) {
+  .meadow img:nth-child(1),
+  .meadow img:nth-child(5) {
+    display: none;
+  }
+}
+
+/* ── Štampa ──────────────────────────────────────────────────────────── */
+
+@media print {
+  body {
+    padding: 0;
+    background: #fff;
+  }
+  main {
+    padding: 0;
+    background: #fff;
+    border: none;
+    box-shadow: none;
+  }
+  .brand {
+    text-shadow: none;
+  }
+  .meadow,
+  .ground,
+  footer {
+    display: none;
+  }
+}
